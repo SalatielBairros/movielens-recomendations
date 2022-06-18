@@ -25,6 +25,9 @@ class DataRepository:
     def save_movies(self, movies):
         self.__get_repository__().save_movies(movies)
 
+    def save_user_genres(self, user_genres: pd.DataFrame):
+        self.__get_repository__().save_user_genres(user_genres)
+
     def get_processed_ratings(self) -> pd.DataFrame:
         return self.__get_repository__().get_processed_ratings()
 

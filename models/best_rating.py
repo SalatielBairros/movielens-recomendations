@@ -1,4 +1,3 @@
-import pandas as pd
 from repository.data_repository import DataRepository
 
 class BestRatingRecommendation:

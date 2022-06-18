@@ -1,3 +1,4 @@
 data/full/*
 __pycache__/
 appsettings.json
+*.ipynb
