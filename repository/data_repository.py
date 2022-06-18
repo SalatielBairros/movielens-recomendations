@@ -28,6 +28,9 @@ class DataRepository:
     def save_user_genres(self, user_genres: pd.DataFrame):
         self.__get_repository__().save_user_genres(user_genres)
 
+    def get_user_genres(self, user_id: int) -> pd.DataFrame:
+        return self.__get_repository__().get_user_genres(user_id)
+
     def get_processed_ratings(self) -> pd.DataFrame:
         return self.__get_repository__().get_processed_ratings()
 
@@ -44,3 +47,8 @@ class DataRepository:
         watched_movies = self.get_watched_movies(user_id)
         movies = self.get_processed_movies()
         return movies[~movies['movieId'].isin(watched_movies)]
+    
+    def get_not_watched_by_genders(self, user_id: int, genders: list[str]) -> pd.DataFrame:
+        not_watched = self.get_not_watched_movies(user_id)
+        not_watched['to_recommend'] = not_watched['genres'].apply(lambda g: len([gen for gen in genders if gen in g]) > 0)
+        return not_watched[not_watched['to_recommend'] == True].drop(columns=['to_recommend'])

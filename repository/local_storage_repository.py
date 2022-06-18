@@ -25,6 +25,11 @@ class LocalStorageRepository:
         user_genres.to_csv(f'{self.files_path}/processed/user_genres.csv', index=False)
 
     @memo
+    def get_user_genres(self, user_id: int) -> pd.DataFrame:
+        user_genres = pd.read_csv(f'{self.files_path}/processed/user_genres.csv')
+        return user_genres.query(f'userId == {user_id}')
+
+    @memo
     def get_processed_ratings(self) -> pd.DataFrame:
         return pd.read_csv(f'{self.files_path}/processed/ratings.csv')
 
