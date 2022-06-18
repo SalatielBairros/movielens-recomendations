@@ -2,6 +2,7 @@ from os import environ as env, path
 import json
 import logging
 from environment.constants import EnvironmentVariables
+import pandas as pd
 
 def configure_environment_from_file(file_path = './appsettings.json'):
     if(path.exists(file_path)):
@@ -17,6 +18,10 @@ def configurate_logging():
                         datefmt="%H:%M:%S")
     logging.info('Logging configurated')
 
+def configure_pandas():
+    pd.set_option('mode.chained_assignment', None)
+
 def prepare_environment():
     configurate_logging()    
     configure_environment_from_file()    
+    configure_pandas()

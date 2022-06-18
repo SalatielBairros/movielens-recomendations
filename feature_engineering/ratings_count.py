@@ -9,4 +9,5 @@ class RatingsCount:
 
     def execute(self) -> tuple[pd.DataFrame, pd.DataFrame]:
         self.movies['total_ratings'] =  self.ratings['movieId'].value_counts()
+        self.movies['total_ratings'] = self.movies['total_ratings'].fillna(0.0).astype(int)
         return self.ratings, self.movies
