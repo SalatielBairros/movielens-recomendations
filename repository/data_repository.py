@@ -39,12 +39,12 @@ class DataRepository:
 
     @memo
     def get_watched_movies(self, user_id) -> pd.DataFrame:
-        ratings = self.__get_repository__().get_original_ratings()
-        return ratings[ratings['userId'] == user_id]['movieId'].unique()
+        ratings = self.__get_repository__().get_processed_ratings()
+        return ratings[ratings['userId'] == user_id]
 
     @memo
     def get_not_watched_movies(self, user_id) -> pd.DataFrame:
-        watched_movies = self.get_watched_movies(user_id)
+        watched_movies = self.get_watched_movies(user_id)['movieId'].unique()
         movies = self.get_processed_movies()
         return movies[~movies['movieId'].isin(watched_movies)]
     
