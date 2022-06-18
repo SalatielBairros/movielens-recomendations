@@ -16,7 +16,8 @@ class LocalStorageRepository:
     def save_ratings(self, ratings):
         ratings.to_csv(f'{self.files_path}/processed/ratings.csv', index=False)
 
-    def save_movies(self, movies):
+    def save_movies(self, movies: pd.DataFrame):
+        movies.reset_index(inplace=True)
         movies.to_csv(f'{self.files_path}/processed/movies.csv', index=False)
 
     @memo
