@@ -3,7 +3,6 @@ from feature_engineering.movie_year import MovieYear
 from feature_engineering.ratings_count import RatingsCount
 from feature_engineering.ratings_mean_score import RatingsMeanScore
 from feature_engineering.movies_id_index import MoviesIdIndex
-from feature_engineering.min_ratings_filter import MinRatingsFilter
 from feature_engineering.timestamp_transformation import TimestampTransformation
 from feature_engineering.user_genres import UserGenres
 import pandas as pd
@@ -16,5 +15,4 @@ def execute_feature_engineering() -> tuple[pd.DataFrame, pd.DataFrame]:
         .add_command(MovieYear) \
         .add_command(TimestampTransformation) \
         .add_command(UserGenres) \
-        .add_command(MinRatingsFilter) \
         .execute()
