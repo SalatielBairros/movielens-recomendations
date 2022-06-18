@@ -1,0 +1,5 @@
+from environment.env_configuration import prepare_environment
+from models.basic_model import BasicRecommendationModel
+
+prepare_environment()
+BasicRecommendationModel().get_recommendations(1)
