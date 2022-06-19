@@ -25,6 +25,9 @@ class DataRepository:
     def save_movies(self, movies):
         self.__get_repository__().save_movies(movies)
 
+    def save_users_distanes(self, distances):
+        self.__get_repository__().save_users_distanes(distances)
+
     def save_user_genres(self, user_genres: pd.DataFrame):
         self.__get_repository__().save_user_genres(user_genres)
 
@@ -47,8 +50,17 @@ class DataRepository:
         watched_movies = self.get_watched_movies(user_id)['movieId'].unique()
         movies = self.get_processed_movies()
         return movies[~movies['movieId'].isin(watched_movies)]
+
+    def has_distance_file(self):
+        return self.__get_repository__().has_distance_file()
+
+    def has_genres_file(self):
+        return self.__get_repository__().has_genres_file()
     
     def get_not_watched_by_genders(self, user_id: int, genders: list[str]) -> pd.DataFrame:
         not_watched = self.get_not_watched_movies(user_id)
         not_watched['to_recommend'] = not_watched['genres'].apply(lambda g: len([gen for gen in genders if gen in g]) > 0)
         return not_watched[not_watched['to_recommend'] == True].drop(columns=['to_recommend'])
+
+    def get_user_distances(self, user_id: int) -> pd.DataFrame:
+        return self.__get_repository__().get_user_distances(user_id)

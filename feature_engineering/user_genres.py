@@ -9,6 +9,9 @@ class UserGenres:
         self.movies = movies
         self.repository = DataRepository()
 
+    def should_execute(self) -> bool:
+        return not self.repository.has_genres_file()
+
     def execute(self) -> tuple[pd.DataFrame, pd.DataFrame]:
         user_genres = []
         for _, row in self.ratings.iterrows():

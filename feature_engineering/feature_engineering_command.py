@@ -14,8 +14,12 @@ class FeatureEngineeringCommand:
     def execute(self) -> tuple[pd.DataFrame, pd.DataFrame]:
         ratings, movies = self.__load_data__()
         for command in self.commands:
+            command_instance = command(ratings, movies)
+            command_instance_should_execute = getattr(command_instance, "should_execute", None)
+            if callable(command_instance_should_execute) and not command_instance_should_execute():
+                continue
             logging.info(f"Executing command {command.__name__}")
-            ratings, movies = command(ratings, movies).execute()
+            ratings, movies = command_instance.execute()
         self.__save_data__(ratings, movies)
         logging.info("Feature engineering finished")
         return ratings, movies
