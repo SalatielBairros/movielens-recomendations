@@ -11,6 +11,7 @@ def configure_environment_from_file(file_path = './appsettings.json'):
             configurations = json.load(file)
             env[EnvironmentVariables.data_repository_type] = configurations[EnvironmentVariables.data_repository_type]
             env[EnvironmentVariables.min_ratings] = configurations[EnvironmentVariables.min_ratings]
+            env[EnvironmentVariables.cache_expiration] = configurations[EnvironmentVariables.cache_expiration]
 
 def configurate_logging():
     logging.basicConfig(format="%(asctime)s: %(message)s",

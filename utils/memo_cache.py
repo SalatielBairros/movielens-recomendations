@@ -1,4 +1,7 @@
 import datetime
+from os import environ as env
+
+cache_expiration = int(env['MEMORY_CACHE_EXPIRATION'])
 
 def memo(f):    
     f.cache = {}
@@ -8,7 +11,7 @@ def memo(f):
             f.cache[key] = {
                 'data': f(*args, **kwargs),
                 'timestamp': datetime.datetime.now(),
-                'expiration': datetime.datetime.now() + datetime.timedelta(minutes=10)
+                'expiration': datetime.datetime.now() + datetime.timedelta(minutes=cache_expiration)
             }        
         return f.cache[key]['data']
     return _f
