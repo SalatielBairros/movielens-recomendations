@@ -64,3 +64,11 @@ class DataRepository:
 
     def get_user_distances(self, user_id: int) -> pd.DataFrame:
         return self.__get_repository__().get_user_distances(user_id)
+
+    def get_ratings_by_users(self, user_ids: list[int]) -> pd.DataFrame:
+        ratings = self.get_processed_ratings()
+        return ratings[ratings['userId'].isin(user_ids)]
+
+    def get_movies_by_ids(self, movie_ids: list[int]) -> pd.DataFrame:
+        movies = self.get_processed_movies()
+        return movies[movies['movieId'].isin(movie_ids)]
