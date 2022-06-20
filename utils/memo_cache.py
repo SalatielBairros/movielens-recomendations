@@ -1,11 +1,16 @@
-def memo(f):
-    # TODO: Add a expiration time to the cache
+import datetime
+
+def memo(f):    
     f.cache = {}
     def _f(*args, **kwargs):
         key = __get_cache_key__(args, f)
-        if key not in f.cache:
-            f.cache[key] = f(*args, **kwargs)        
-        return f.cache[key]
+        if key not in f.cache or f.cache[key]['expiration'] < datetime.datetime.now():
+            f.cache[key] = {
+                'data': f(*args, **kwargs),
+                'timestamp': datetime.datetime.now(),
+                'expiration': datetime.datetime.now() + datetime.timedelta(minutes=10)
+            }        
+        return f.cache[key]['data']
     return _f
 
 def __get_cache_key__(args, f):
