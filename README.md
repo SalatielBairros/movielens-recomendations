@@ -41,3 +41,4 @@ For te API, the Documentation can be found at [http://localhost:8000/docs](http:
 
 * Start using mongodb to store the data and not in a csv file.
 * Create workers to preprocess de data.
+* Training with the complete dataset.
