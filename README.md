@@ -8,9 +8,9 @@ The data-source can be obtained [here](https://grouplens.org/datasets/movielens/
 
 ## Dependencies
 
-    - [pandas](https://pandas.pydata.org/)
-    - [numpy](https://numpy.org/)
-    - [fastAPI](https://fastapi.tiangolo.com/)
+- [pandas](https://pandas.pydata.org/)
+- [numpy](https://numpy.org/)
+- [fastAPI](https://fastapi.tiangolo.com/)
 
     ```bash
     pip install pandas 
